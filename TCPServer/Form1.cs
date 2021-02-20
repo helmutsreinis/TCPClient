@@ -113,6 +113,32 @@ namespace TCPServer
                 }
             }
         }
+
+        private void btn_StopServer_Click(object sender, EventArgs e)
+        {
+            server.Stop();
+            tb_ReceivedMessages.Text += $"Stopping...{Environment.NewLine}";
+            btn_StartServ.Enabled = true;
+            btn_StopServer.Enabled = false;
+            btn_SendMsg.Enabled = false;
+        }
+
+        private void btn_SendAll_Click(object sender, EventArgs e)
+        {
+            if (server.IsListening)
+            {
+                if (!string.IsNullOrEmpty(tb_SendMsg.Text) && lb_Clients.Items.Count != 0)
+                {
+                    for (int i = 0; i < lb_Clients.Items.Count; i++)
+                    {
+                        ConnectedUser loopinguser = (ConnectedUser)lb_Clients.Items[i];
+                        server.Send(loopinguser.IP, tb_SendMsg.Text);
+                    }
+                    tb_ReceivedMessages.Text += $"Server: {tb_SendMsg.Text}{Environment.NewLine}";
+                    tb_SendMsg.Text = string.Empty;
+                }
+            }
+        }
     }
 
     public class ConnectedUser

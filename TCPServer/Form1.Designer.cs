@@ -38,6 +38,8 @@ namespace TCPServer
             this.btn_StartServ = new System.Windows.Forms.Button();
             this.lb_Clients = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.btn_StopServer = new System.Windows.Forms.Button();
+            this.btn_SendAll = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -85,7 +87,7 @@ namespace TCPServer
             // 
             // btn_SendMsg
             // 
-            this.btn_SendMsg.Location = new System.Drawing.Point(311, 451);
+            this.btn_SendMsg.Location = new System.Drawing.Point(392, 451);
             this.btn_SendMsg.Name = "btn_SendMsg";
             this.btn_SendMsg.Size = new System.Drawing.Size(75, 23);
             this.btn_SendMsg.TabIndex = 6;
@@ -95,9 +97,9 @@ namespace TCPServer
             // 
             // btn_StartServ
             // 
-            this.btn_StartServ.Location = new System.Drawing.Point(392, 451);
+            this.btn_StartServ.Location = new System.Drawing.Point(12, 35);
             this.btn_StartServ.Name = "btn_StartServ";
-            this.btn_StartServ.Size = new System.Drawing.Size(75, 23);
+            this.btn_StartServ.Size = new System.Drawing.Size(56, 23);
             this.btn_StartServ.TabIndex = 7;
             this.btn_StartServ.Text = "Start";
             this.btn_StartServ.UseVisualStyleBackColor = true;
@@ -123,11 +125,33 @@ namespace TCPServer
             this.label3.TabIndex = 9;
             this.label3.Text = "Client IP:";
             // 
+            // btn_StopServer
+            // 
+            this.btn_StopServer.Location = new System.Drawing.Point(12, 64);
+            this.btn_StopServer.Name = "btn_StopServer";
+            this.btn_StopServer.Size = new System.Drawing.Size(56, 24);
+            this.btn_StopServer.TabIndex = 10;
+            this.btn_StopServer.Text = "Stop";
+            this.btn_StopServer.UseVisualStyleBackColor = true;
+            this.btn_StopServer.Click += new System.EventHandler(this.btn_StopServer_Click);
+            // 
+            // btn_SendAll
+            // 
+            this.btn_SendAll.Location = new System.Drawing.Point(311, 451);
+            this.btn_SendAll.Name = "btn_SendAll";
+            this.btn_SendAll.Size = new System.Drawing.Size(75, 23);
+            this.btn_SendAll.TabIndex = 11;
+            this.btn_SendAll.Text = "Send All";
+            this.btn_SendAll.UseVisualStyleBackColor = true;
+            this.btn_SendAll.Click += new System.EventHandler(this.btn_SendAll_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(776, 508);
+            this.ClientSize = new System.Drawing.Size(777, 508);
+            this.Controls.Add(this.btn_SendAll);
+            this.Controls.Add(this.btn_StopServer);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lb_Clients);
             this.Controls.Add(this.btn_StartServ);
@@ -158,6 +182,8 @@ namespace TCPServer
         private System.Windows.Forms.Button btn_StartServ;
         private System.Windows.Forms.ListBox lb_Clients;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btn_StopServer;
+        private System.Windows.Forms.Button btn_SendAll;
     }
 }
 
