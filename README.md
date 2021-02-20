@@ -1,3 +1,4 @@
 # TCPClient
 
-Simple tcp clinet and server with User login authentication based on simpletcp library
+Simple tcp client and server with User login authentication based on simpletcp library
+
