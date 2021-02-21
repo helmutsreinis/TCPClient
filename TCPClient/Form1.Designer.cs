@@ -42,6 +42,7 @@ namespace TCPClient
             this.label4 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.btn_Disconnect = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -156,11 +157,23 @@ namespace TCPClient
             this.label5.TabIndex = 11;
             this.label5.Text = "To:";
             // 
+            // btn_Disconnect
+            // 
+            this.btn_Disconnect.Enabled = false;
+            this.btn_Disconnect.Location = new System.Drawing.Point(284, 15);
+            this.btn_Disconnect.Name = "btn_Disconnect";
+            this.btn_Disconnect.Size = new System.Drawing.Size(75, 23);
+            this.btn_Disconnect.TabIndex = 13;
+            this.btn_Disconnect.Text = "Disconnect";
+            this.btn_Disconnect.UseVisualStyleBackColor = true;
+            this.btn_Disconnect.Click += new System.EventHandler(this.btn_Disconnect_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(538, 434);
+            this.Controls.Add(this.btn_Disconnect);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.tb_Password);
@@ -199,6 +212,7 @@ namespace TCPClient
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btn_Disconnect;
     }
 }
 

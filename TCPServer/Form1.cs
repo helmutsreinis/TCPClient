@@ -1,12 +1,8 @@
 ﻿using SimpleTcp;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace TCPServer
@@ -19,13 +15,34 @@ namespace TCPServer
         }
 
         SimpleTcpServer server;
+        BackgroundWorker UnauthorizedUsers = new BackgroundWorker();
 
         private void btn_StartServ_Click(object sender, EventArgs e)
         {
             server.Start();
-            tb_ReceivedMessages.Text += $"Starting...{Environment.NewLine}";
+            tb_ReceivedMessages.Text += $"Started Server...{Environment.NewLine}";
             btn_StartServ.Enabled = false;
             btn_SendMsg.Enabled = true;
+        }
+
+        private void UnauthorizedUsers_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                Thread.Sleep(10000);
+                for (int i = 0; i < lb_Clients.Items.Count; i++)
+                {
+                    ConnectedUser loopinguser = (ConnectedUser)lb_Clients.Items[i];
+                    if (loopinguser.Username == "Unauthorized")
+                    {
+                        this.BeginInvoke(new Action(delegate ()
+                        {
+                            lb_Clients.Items.RemoveAt(i);
+                        }));
+                        server.DisconnectClient(loopinguser.IP);
+                    }
+                }
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -35,8 +52,9 @@ namespace TCPServer
             server.Events.ClientConnected += Events_ClientConnected;
             server.Events.ClientDisconnected += Events_ClientDisconnected;
             server.Events.DataReceived += Events_DataReceived;
-            //lb_Clients.DisplayMember = "Username";
-            //lb_Clients.ValueMember = "IP";
+
+            UnauthorizedUsers.DoWork += UnauthorizedUsers_DoWork;
+            UnauthorizedUsers.RunWorkerAsync();
         }
 
         private void Events_DataReceived(object sender, DataReceivedEventArgs e)
@@ -48,6 +66,11 @@ namespace TCPServer
                 if (Data.StartsWith("/login "))
                 {
                     string[] username = Data.Replace("/login ", "").Split(":");
+                    if (username[0].Length == 0 || username[1].Length == 0 || username[0].Contains(" ") || username[1].Contains(" "))
+                    {
+                        server.Send(e.IpPort, "Verification Failed...");
+                        server.DisconnectClient(e.IpPort);
+                    }
                     ConnectedUser connectedUser = new ConnectedUser();
                     connectedUser.IP = e.IpPort;
                     connectedUser.Username = "Unauthorized";
@@ -117,10 +140,12 @@ namespace TCPServer
         private void btn_StopServer_Click(object sender, EventArgs e)
         {
             server.Stop();
+            server.Dispose();
             tb_ReceivedMessages.Text += $"Stopping...{Environment.NewLine}";
             btn_StartServ.Enabled = true;
             btn_StopServer.Enabled = false;
             btn_SendMsg.Enabled = false;
+            btn_SendAll.Enabled = false;
         }
 
         private void btn_SendAll_Click(object sender, EventArgs e)

@@ -26,6 +26,7 @@ namespace TCPClient
                 client.Connect();
                 btn_SendMsg.Enabled = true;
                 btn_Connect.Enabled = false;
+                btn_Disconnect.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -72,6 +73,10 @@ namespace TCPClient
             this.Invoke((MethodInvoker)delegate
             {
                 tb_ReceivedMessages.Text += $"Server Disconnected. {Environment.NewLine}";
+                btn_Connect.Enabled = true;
+                btn_Disconnect.Enabled = false;
+                client.Disconnect();
+                client.Dispose();
             });
         }
 
@@ -84,6 +89,22 @@ namespace TCPClient
                 tb_ReceivedMessages.Text += $"Verifying Credentials... {Environment.NewLine}";
                 client.Send($"/login {tb_UserName.Text}:{tb_Password.Text}");
             });
+        }
+
+        private void btn_Disconnect_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                client.Disconnect();
+                client.Dispose();
+                btn_SendMsg.Enabled = false;
+                btn_Connect.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
