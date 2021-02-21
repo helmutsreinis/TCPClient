@@ -106,5 +106,25 @@ namespace TCPClient
                 MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            if (tb_SendMsg.Text == string.Empty || tb_SendTo.Text == string.Empty)
+            {
+                btn_SendMsg.Enabled = false;
+            }
+            else
+                btn_SendMsg.Enabled = true;
+        }
+
+        private void tb_SendMsg_TextChanged(object sender, EventArgs e)
+        {
+            if (tb_SendMsg.Text == string.Empty || tb_SendTo.Text == string.Empty)
+            {
+                btn_SendMsg.Enabled = false;
+            }
+            else
+                btn_SendMsg.Enabled = true;
+        }
     }
 }

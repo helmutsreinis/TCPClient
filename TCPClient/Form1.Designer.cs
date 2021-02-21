@@ -40,7 +40,7 @@ namespace TCPClient
             this.label3 = new System.Windows.Forms.Label();
             this.tb_Password = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tb_SendTo = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btn_Disconnect = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -88,6 +88,7 @@ namespace TCPClient
             this.tb_SendMsg.Name = "tb_SendMsg";
             this.tb_SendMsg.Size = new System.Drawing.Size(393, 23);
             this.tb_SendMsg.TabIndex = 5;
+            this.tb_SendMsg.TextChanged += new System.EventHandler(this.tb_SendMsg_TextChanged);
             // 
             // label2
             // 
@@ -100,7 +101,8 @@ namespace TCPClient
             // 
             // btn_SendMsg
             // 
-            this.btn_SendMsg.Location = new System.Drawing.Point(416, 382);
+            this.btn_SendMsg.Enabled = false;
+            this.btn_SendMsg.Location = new System.Drawing.Point(416, 371);
             this.btn_SendMsg.Name = "btn_SendMsg";
             this.btn_SendMsg.Size = new System.Drawing.Size(75, 23);
             this.btn_SendMsg.TabIndex = 6;
@@ -141,12 +143,13 @@ namespace TCPClient
             this.label4.TabIndex = 9;
             this.label4.Text = "Password:";
             // 
-            // textBox3
+            // tb_SendTo
             // 
-            this.textBox3.Location = new System.Drawing.Point(98, 368);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(180, 23);
-            this.textBox3.TabIndex = 12;
+            this.tb_SendTo.Location = new System.Drawing.Point(98, 368);
+            this.tb_SendTo.Name = "tb_SendTo";
+            this.tb_SendTo.Size = new System.Drawing.Size(180, 23);
+            this.tb_SendTo.TabIndex = 12;
+            this.tb_SendTo.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // label5
             // 
@@ -174,7 +177,7 @@ namespace TCPClient
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(538, 434);
             this.Controls.Add(this.btn_Disconnect);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.tb_SendTo);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.tb_Password);
             this.Controls.Add(this.label4);
@@ -210,7 +213,7 @@ namespace TCPClient
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tb_Password;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox tb_SendTo;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btn_Disconnect;
     }
