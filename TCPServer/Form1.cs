@@ -22,6 +22,7 @@ namespace TCPServer
             server.Start();
             tb_ReceivedMessages.Text += $"Started Server...{Environment.NewLine}";
             btn_StartServ.Enabled = false;
+            btn_StopServer.Enabled = true;
             btn_SendMsg.Enabled = true;
         }
 
